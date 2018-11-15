@@ -2,5 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import App from 'components/App'
+import Root from 'Root'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const appWithReduxStore = 
+  <Root>  
+    <App />
+  </Root>
+
+ReactDOM.render(appWithReduxStore, document.getElementById('root'))
