@@ -1,24 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
 import * as actions from 'actions'
+import requireAuth from 'components/requireAuth'
 
 class CommentBox extends Component {
   state = { comment: '' }
-  
-  //component just got rendered
-  componentDidMount() {
-    this.checkIfLoggedIn()
-  }
-  
-  componentDidUpdate() {
-    this.checkIfLoggedIn()
-  }
-  
-  checkIfLoggedIn() {
-    if (!this.props.isLoggedIn) {
-      this.props.history.push('/')
-    }
-  }
   
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value })
@@ -46,6 +33,4 @@ class CommentBox extends Component {
   }
 }
 
-const mapStateToProps = state => ({ isLoggedIn: state.auth })
-
-export default connect(mapStateToProps, actions)(CommentBox)
+export default connect(null, actions)(requireAuth(CommentBox))
