@@ -5,6 +5,21 @@ import * as actions from 'actions'
 class CommentBox extends Component {
   state = { comment: '' }
   
+  //component just got rendered
+  componentDidMount() {
+    this.checkIfLoggedIn()
+  }
+  
+  componentDidUpdate() {
+    this.checkIfLoggedIn()
+  }
+  
+  checkIfLoggedIn() {
+    if (!this.props.isLoggedIn) {
+      this.props.history.push('/')
+    }
+  }
+  
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -31,4 +46,6 @@ class CommentBox extends Component {
   }
 }
 
-export default connect(null, actions)(CommentBox)
+const mapStateToProps = state => ({ isLoggedIn: state.auth })
+
+export default connect(mapStateToProps, actions)(CommentBox)
